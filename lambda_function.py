@@ -29,9 +29,10 @@ def lambda_handler(event, context):
     timestamp = datetime.now().strftime("%Y%m%d")
     key = f"BookingDetails_{timestamp}.json"
 
-    Response = s3.put_object(Bucket=bucket_name, Key=key, Body = sqs_msg)
+    Response = s3.put_object(Bucket=bucket_name, Key=key, Body = json.dumps(sqs_msg))
+
         
-    print("Ending SQS Batch Process")
+    print("Ending SQS Batch Process !!")
     
     return {
         'statusCode': 200,
